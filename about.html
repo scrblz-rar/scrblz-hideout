@@ -6,56 +6,84 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: monospace;
-      color: #00ff00;
-      background: 
-        linear-gradient(45deg, #444 25%, transparent 25%), 
-        linear-gradient(-45deg, #444 25%, transparent 25%), 
-        linear-gradient(45deg, transparent 75%, #444 75%), 
-        linear-gradient(-45deg, transparent 75%, #444 75%);
-      background-size: 40px 40px;
-      background-color: #222;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Consolas", monospace;
+      background: repeating-conic-gradient(#ccc 0% 25%, transparent 0% 50%) 
+                  50% / 40px 40px; /* checkerboard background */
     }
-    .terminal {
-      border: 2px solid #00ff00;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.85);
-      box-shadow: 0 0 15px #00ff00;
-      max-width: 800px;
-      margin: 80px auto;
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
     }
+
+    .character img {
+      max-height: 300px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
+    }
+
+    .window {
+      background: rgba(255, 255, 255, 0.8); /* fake transparent window */
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 30px 50px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(0,0,0,0.25);
+      max-width: 500px;
+      width: 90%;
+    }
+
     h2 {
-      color: #00ffff;
+      margin: 0 0 20px 0;
+      font-size: 1.5rem;
       text-align: center;
+      color: #111;
     }
+
     .path {
-      color: #00ffff;
+      color: #444;
+      font-weight: bold;
+      margin: 15px 0 5px;
     }
+
+    p {
+      margin: 10px 0;
+      color: #222;
+    }
+
     a {
-      color: #ff00ff;
+      color: #0066cc;
       text-decoration: none;
+      font-weight: 600;
     }
+
     a:hover {
       text-decoration: underline;
-    }
-    .blink {
-      animation: blink 1s step-start infinite;
-    }
-    @keyframes blink {
-      50% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="terminal">
-    <h2>ABOUT SCRBLZ HIDEOUT</h2>
-    <p class="path">C:\SCRBLZ_HIDEOUT\ABOUT.TXT></p>
-    <p>Welcome to <span style="color:#ff00ff;">Scrblz Hideout</span> — your underground directory of unblocked games.</p>
-    <p>📂 All files are hosted securely on Google Drive.</p>
-    <p>⚡ Theme: Retro file roots, terminal vibes, and a secret base atmosphere.</p>
-    <p class="blink">_</p>
-    <p><a href="index.html">&lt; BACK TO ROOT &gt;</a></p>
+  <div class="container">
+    <!-- Left side character -->
+    <div class="character">
+      <img src="© (2).png" alt="Scrblz Character">
+    </div>
+
+    <!-- Right side window -->
+    <div class="window">
+      <h2>About</h2>
+      <p class="path">C:\SCRBLZ_HIDEOUT\ABOUT.TXT></p>
+      <p>Welcome to <strong>Scrblz Hideout</strong>, a cozy root directory for unblocked games.</p>
+      <p>📂 All games are hosted through Google Drive.</p>
+      <p>✨ Theme inspired by old-school file explorers and root paths.</p>
+      <p class="path">C:\></p>
+      <p><a href="index.html">&lt; BACK TO ROOT &gt;</a></p>
+    </div>
   </div>
 </body>
 </html>
