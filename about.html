@@ -4,15 +4,51 @@
   <meta charset="UTF-8">
   <title>About - Scrblz Hideout</title>
   <style>
-    body { background-color: black; color: #00ff00; font-family: monospace; padding: 20px; }
-    .path { color: #00ffff; }
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 40px;
+    }
+    .path {
+      color: #00ffff;
+    }
+    .terminal {
+      border: 2px solid #00ff00;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 10px #00ff00;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #00ffff;
+      text-align: center;
+    }
+    a {
+      color: #ff00ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .blink {
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <h2>About</h2>
-  <p class="path">C:\SCRBLZ_HIDEOUT\ABOUT.TXT></p>
-  <p>Welcome to Scrblz Hideout, a place for unblocked games.</p>
-  <p>All games are hosted on Google Drive.</p>
-  <a href="index.html">Back</a>
+  <div class="terminal">
+    <h2>ABOUT SCRBLZ HIDEOUT</h2>
+    <p class="path">C:\SCRBLZ_HIDEOUT\ABOUT.TXT></p>
+    <p>Welcome to <span style="color:#ff00ff;">Scrblz Hideout</span> — your underground directory of unblocked games.</p>
+    <p>📂 All files are hosted securely on Google Drive.</p>
+    <p>⚡ Theme: Retro file roots, terminal vibes, and a secret base atmosphere.</p>
+    <p class="blink">_</p>
+    <p><a href="index.html">&lt; BACK TO ROOT &gt;</a></p>
+  </div>
 </body>
 </html>
