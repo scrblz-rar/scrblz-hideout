@@ -5,41 +5,77 @@
   <title>Scrblz Hideout</title>
   <style>
     body {
-      background-color: black;
-      color: #00ff00;
+      background: url("https://www.transparenttextures.com/patterns/asfalt-dark.png") repeat, #000;
+      background-size: auto;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: "Consolas", "Courier New", monospace;
-      padding: 20px;
     }
+
+    .window {
+      background: rgba(0, 0, 0, 0.6); /* fake transparency */
+      border: 2px solid #00ff00;
+      border-radius: 8px;
+      padding: 20px 40px;
+      color: #00ff00;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+      max-width: 600px;
+      width: 90%;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      color: #00ffff;
+      text-align: center;
+    }
+
     .path {
       color: #00ffff;
+      margin: 10px 0;
     }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
     a {
       color: #00ff00;
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
     .folder::before {
       content: "[DIR] ";
       color: #ffff00;
     }
+
     .file::before {
       content: "     ";
     }
   </style>
 </head>
 <body>
-  <h2>Scrblz Hideout</h2>
-  <p class="path">C:\SCRBLZ_HIDEOUT\></p>
-  
-  <ul>
-    <li class="folder"><a href="#">Games</a></li>
-    <li class="folder"><a href="#">Tools</a></li>
-    <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">Unblocked Game Drive</a></li>
-    <li class="file"><a href="about.html">About.txt</a></li>
-  </ul>
+  <div class="window">
+    <h2>Scrblz Hideout</h2>
+    <p class="path">C:\SCRBLZ_HIDEOUT\></p>
+    
+    <ul>
+      <li class="folder"><a href="#">Games</a></li>
+      <li class="folder"><a href="#">Tools</a></li>
+      <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">Unblocked Game Drive</a></li>
+      <li class="file"><a href="about.html">About.txt</a></li>
+    </ul>
 
-  <p class="path">C:\></p>
+    <p class="path">C:\></p>
+  </div>
 </body>
 </html>
+
