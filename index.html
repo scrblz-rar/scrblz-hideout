@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scrblz Hideout</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: "Consolas", "Courier New", monospace;
+      padding: 20px;
+    }
+    .path {
+      color: #00ffff;
+    }
+    a {
+      color: #00ff00;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .folder::before {
+      content: "[DIR] ";
+      color: #ffff00;
+    }
+    .file::before {
+      content: "     ";
+    }
+  </style>
+</head>
+<body>
+  <h2>Scrblz Hideout</h2>
+  <p class="path">C:\SCRBLZ_HIDEOUT\></p>
+  
+  <ul>
+    <li class="folder"><a href="#">Games</a></li>
+    <li class="folder"><a href="#">Tools</a></li>
+    <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">Unblocked Game Drive</a></li>
+    <li class="file"><a href="about.html">About.txt</a></li>
+  </ul>
+
+  <p class="path">C:\></p>
+</body>
+</html>
