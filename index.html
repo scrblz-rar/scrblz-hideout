@@ -15,6 +15,18 @@
                   50% / 40px 40px; /* checkerboard pattern */
     }
 
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .character img {
+      max-height: 300px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
+    }
+
     .window {
       background: rgba(255, 255, 255, 0.8); /* semi transparent white window */
       border: 2px solid #333;
@@ -22,7 +34,7 @@
       padding: 30px 50px;
       text-align: left;
       box-shadow: 0 0 15px rgba(0,0,0,0.25);
-      max-width: 600px;
+      max-width: 500px;
       width: 90%;
     }
 
@@ -65,20 +77,29 @@
   </style>
 </head>
 <body>
-  <div class="window">
-    <h2>Scrblz Hideout</h2>
-    <p class="path">C:\SCRBLZ_HIDEOUT\></p>
-    
-    <ul>
-      <li class="folder"><a href="#">Games</a></li>
-      <li class="folder"><a href="#">Tools</a></li>
-      <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">Unblocked Game Drive</a></li>
-      <li class="file"><a href="about.html">About.txt</a></li>
-    </ul>
+  <div class="container">
+    <!-- Left side character -->
+    <div class="character">
+      <img src="© (2).png" alt="Scrblz Character">
+    </div>
 
-    <p class="path">C:\></p>
+    <!-- Right side window -->
+    <div class="window">
+      <h2>Scrblz Hideout</h2>
+      <p class="path">C:\SCRBLZ_HIDEOUT\></p>
+      
+      <ul>
+        <li class="folder"><a href="#">Games</a></li>
+        <li class="folder"><a href="#">Tools</a></li>
+        <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">Unblocked Game Drive</a></li>
+        <li class="file"><a href="about.html">About.txt</a></li>
+      </ul>
+
+      <p class="path">C:\></p>
+    </div>
   </div>
 </body>
 </html>
+
 
 
