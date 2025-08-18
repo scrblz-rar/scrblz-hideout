@@ -5,25 +5,32 @@
   <title>About - Scrblz Hideout</title>
   <style>
     body {
-      background-color: black;
-      color: #00ff00;
+      margin: 0;
+      padding: 0;
       font-family: monospace;
-      padding: 40px;
-    }
-    .path {
-      color: #00ffff;
+      color: #00ff00;
+      background: 
+        linear-gradient(45deg, #444 25%, transparent 25%), 
+        linear-gradient(-45deg, #444 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #444 75%), 
+        linear-gradient(-45deg, transparent 75%, #444 75%);
+      background-size: 40px 40px;
+      background-color: #222;
     }
     .terminal {
       border: 2px solid #00ff00;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 0 10px #00ff00;
+      background: rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 15px #00ff00;
       max-width: 800px;
-      margin: auto;
+      margin: 80px auto;
     }
     h2 {
       color: #00ffff;
       text-align: center;
+    }
+    .path {
+      color: #00ffff;
     }
     a {
       color: #ff00ff;
