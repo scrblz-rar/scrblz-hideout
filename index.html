@@ -5,36 +5,38 @@
   <title>Scrblz Hideout</title>
   <style>
     body {
-      background: url("https://www.transparenttextures.com/patterns/asfalt-dark.png") repeat, #000;
-      background-size: auto;
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "Consolas", "Courier New", monospace;
+      font-family: "Consolas", monospace;
+      background: repeating-conic-gradient(#ccc 0% 25%, transparent 0% 50%) 
+                  50% / 40px 40px; /* checkerboard pattern */
     }
 
     .window {
-      background: rgba(0, 0, 0, 0.6); /* fake transparency */
-      border: 2px solid #00ff00;
-      border-radius: 8px;
-      padding: 20px 40px;
-      color: #00ff00;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+      background: rgba(255, 255, 255, 0.8); /* semi transparent white window */
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 30px 50px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(0,0,0,0.25);
       max-width: 600px;
       width: 90%;
     }
 
     h2 {
-      margin: 0 0 10px 0;
-      color: #00ffff;
+      margin: 0 0 20px 0;
+      font-size: 1.5rem;
       text-align: center;
+      color: #111;
     }
 
     .path {
-      color: #00ffff;
-      margin: 10px 0;
+      color: #444;
+      font-weight: bold;
+      margin: 15px 0 5px;
     }
 
     ul {
@@ -44,8 +46,9 @@
     }
 
     a {
-      color: #00ff00;
+      color: #0066cc;
       text-decoration: none;
+      font-weight: 600;
     }
 
     a:hover {
@@ -53,12 +56,11 @@
     }
 
     .folder::before {
-      content: "[DIR] ";
-      color: #ffff00;
+      content: "📁 ";
     }
 
     .file::before {
-      content: "     ";
+      content: "📄 ";
     }
   </style>
 </head>
@@ -78,4 +80,5 @@
   </div>
 </body>
 </html>
+
 
