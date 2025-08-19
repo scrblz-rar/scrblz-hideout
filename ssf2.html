@@ -2,34 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Super Smash Flash 2</title>
+  <title>Flash Game Player</title>
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <style>
     body {
       margin: 0;
-      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      background: #000;
     }
     #game {
-      width: 100%;
-      height: 100%;
-      max-width: 960px; /* Change to your SWF size */
-      max-height: 720px;
+      width: 800px;  /* adjust for your game */
+      height: 600px;
     }
   </style>
 </head>
 <body>
+  <!-- The SWF game will load here -->
   <div id="game"></div>
+
   <script>
-    window.addEventListener("load", () => {
-      const ruffle = window.RufflePlayer.newest();
-      const player = ruffle.createPlayer();
-      document.getElementById("game").appendChild(player);
-      player.load("SSF2Beta_v1.3.1.2.swf"); // your SWF file in the repo
-    });
+    // Create a Ruffle instance
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    document.getElementById("game").appendChild(player);
+
+    // Load the SWF from the repo (must be in the same folder as this HTML file)
+    player.load("game.swf"); 
   </script>
 </body>
 </html>
