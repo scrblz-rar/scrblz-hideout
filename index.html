@@ -90,7 +90,7 @@
   <div class="stage">
     <div class="window">
       <div class="titlebar">
-        <span class="title">File Explorer</span>
+        <span class="title">Game Loader</span>
         <div class="chrome">
           <button id="btnReload">↻</button>
           <button id="btnOpen">⧉</button>
@@ -118,7 +118,7 @@
   </div>
 
   <!-- SCRBLZ Assistant -->
- <img id="scrblz" src="scrblz.png" alt="Scrblz Assistant" />
+  <img id="scrblz" src="/mnt/data/588ec04f-af90-4d36-8c61-29bb4bd90d26.png" alt="Scrblz" />
   <div id="bubble"></div>
 
   <script>
@@ -142,7 +142,7 @@
     // Scrblz messages
     const scrblz = document.getElementById("scrblz");
     const bubble = document.getElementById("bubble");
-    const messages = ["yo, need help?","adrian, explain our friend group","clippy’s jealous of me.","pro tip: don’t click random .exe files","gamers stay winning.","scrblz corp, heh i only use LAG corp", "i live on the tears of school admins."];
+    const messages = ["Yo, need help?","This UI goes hard ngl","Clippy’s jealous of me.","Pro tip: don’t click random .exe files","Gamers stay winning.","SCRBLZ system online ✅"];
     function showMessage(){
       bubble.textContent = messages[Math.floor(Math.random()*messages.length)];
       bubble.style.display="block";
@@ -150,10 +150,24 @@
     }
     scrblz.addEventListener("click", showMessage);
 
-   
-     \
+    // Draggable Scrblz
+    scrblz.onmousedown = function(e){
+      scrblz.style.cursor = 'grabbing';
+      let shiftX = e.clientX - scrblz.getBoundingClientRect().left;
+      let shiftY = e.clientY - scrblz.getBoundingClientRect().top;
+      function moveAt(pageX,pageY){
+        scrblz.style.left = pageX - shiftX + 'px';
+        scrblz.style.top = pageY - shiftY + 'px';
+      }
+      function onMouseMove(e){ moveAt(e.pageX,e.pageY); }
+      document.addEventListener('mousemove',onMouseMove);
+      scrblz.onmouseup = function(){
+        document.removeEventListener('mousemove',onMouseMove);
+        scrblz.onmouseup = null;
+        scrblz.style.cursor = 'grab';
+      };
     };
-   
+    scrblz.ondragstart = function(){ return false; };
   </script>
 </body>
 </html>
