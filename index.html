@@ -151,16 +151,9 @@
     scrblz.addEventListener("click", showMessage);
 
    
-      }
-      function onMouseMove(e){ moveAt(e.pageX,e.pageY); }
-      document.addEventListener('mousemove',onMouseMove);
-      scrblz.onmouseup = function(){
-        document.removeEventListener('mousemove',onMouseMove);
-        scrblz.onmouseup = null;
-        scrblz.style.cursor = 'grab';
-      };
+     \
     };
-    scrblz.ondragstart = function(){ return false; };
+   
   </script>
 </body>
 </html>
