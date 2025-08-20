@@ -6,65 +6,101 @@
   <style>
     body {
       margin: 0;
-      height: 90vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Consolas", monospace;
       background: repeating-conic-gradient(#ccc 0% 25%, transparent 0% 50%) 
                   50% / 40px 40px; /* checkerboard pattern */
+      overflow: hidden;
     }
 
     .container {
       display: flex;
       align-items: center;
       gap: 40px;
+      flex-wrap: wrap;
+      padding: 20px;
     }
 
     .character img {
-      max-height: 500px;
+      max-height: 450px;
       width: auto;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
+      filter: drop-shadow(0 0 12px rgba(0,0,0,0.5));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     .window {
-      background: rgba(255, 255, 255, 0.8); /* semi transparent white window */
+      background: rgba(255, 255, 255, 0.75);
       border: 2px solid #333;
-      border-radius: 10px;
-      padding: 300px 100px;
+      border-radius: 12px;
+      padding: 40px 60px;
       text-align: left;
-      box-shadow: 0 0 15px rgba(0,0,0,0.25);
-      max-width: 1000px;
-      width: 90%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      transition: 0.2s ease;
+      max-width: 700px;
+      flex: 1;
+    }
+
+    .window:hover {
+      box-shadow: 0 0 35px rgba(0,0,0,0.5);
+      border-color: #0066cc;
     }
 
     h2 {
       margin: 0 0 20px 0;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       text-align: center;
       color: #111;
+      letter-spacing: 1px;
     }
 
     .path {
-      color: #444;
+      color: #222;
       font-weight: bold;
-      margin: 15px 0 5px;
+      margin: 15px 0 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #333;
+      animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #333; }
     }
 
     ul {
       list-style-type: none;
       padding: 0;
-      margin: 0;
+      margin: 0 0 20px 0;
+    }
+
+    li {
+      margin: 10px 0;
     }
 
     a {
       color: #0066cc;
       text-decoration: none;
       font-weight: 600;
+      transition: color 0.2s, text-shadow 0.2s;
     }
 
     a:hover {
-      text-decoration: underline;
+      color: #004499;
+      text-shadow: 0 0 6px rgba(0,102,204,0.6);
     }
 
     .folder::before {
@@ -73,6 +109,12 @@
 
     .file::before {
       content: "📄 ";
+    }
+
+    @media (max-width: 800px) {
+      .container { flex-direction: column; gap: 20px; }
+      .character img { max-height: 300px; }
+      .window { padding: 25px 30px; }
     }
   </style>
 </head>
@@ -86,19 +128,16 @@
     <!-- Right side window -->
     <div class="window">
       <h2>Scrblz Hideout</h2>
-      <p class="path">C:\SCRBLZ_HIDEOUT\></p>
+      <p class="path">C:\\SCRBLZ_HIDEOUT\\></p>
       
       <ul>
-        <li class="folder"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvSd8Vza3DI1ZTvzSMg0VhdUPsQ7HaYOEZahIaO7vDuHajww/viewform?usp=sharing&ouid=106768397937154065807">drive access</a></li>
+        <li class="folder"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvSd8Vza3DI1ZTvzSMg0VhdUPsQ7HaYOEZahIaO7vDuHajww/viewform?usp=sharing" target="_blank">drive access</a></li>
         <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank">drive list</a></li>
         <li class="file"><a href="about.html">about.txt</a></li>
       </ul>
 
-      <p class="path">C:\></p>
+      <p class="path">C:\\></p>
     </div>
   </div>
 </body>
 </html>
-
-
-
