@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Scrblz Hideout</title>
+  <title>scrblz hideout</title>
   <style>
+    /* ====== Base / Background ====== */
     :root{
-      --ink:#111; --muted:#3a3a3a; --accent:#0ea5e9; --glass:#ffffffcc; --border:#222;
+      --ink:#111; --muted:#3a3a3a; --accent:#0ea5e9; --glass:#ffffffcc; --border:#b5b5b5; --bar:#f0f0f0;
     }
     *{box-sizing:border-box}
-    html,body{height:100%; margin:0; font-family:Consolas, monospace; color:var(--ink);}
+    html,body{height:100%}
     body{
-      display:flex; justify-content:center; align-items:center; min-height:100vh; overflow:hidden;
-      background:
-        repeating-conic-gradient(#e0e0e0 0% 25%, transparent 0% 50%) 50%/40px 40px;
+      margin:0; font-family:Consolas, monaco, monospace; color:var(--ink);
+      display:grid; place-items:center; min-height:100vh; overflow:hidden;
+      /* Fake transparency: checkerboard + neutral white→grey gradient overlay */
+      background: repeating-conic-gradient(#e0e0e0 0% 25%, transparent 0% 50%) 50%/40px 40px;
       position:relative;
     }
+    /* animated neutral gradient layer (white → grey) */
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none;
-      background: linear-gradient(120deg, #ffffff55, #c0c0c055);
-      mix-blend-mode: multiply; filter: saturate(1.2);
-      animation: shift 12s ease-in-out infinite alternate;
+      background: linear-gradient(120deg, rgba(255,255,255,.45), rgba(205,205,205,.45), rgba(235,235,235,.45));
+      mix-blend-mode: multiply; filter: saturate(1.05);
+      animation: shift 14s ease-in-out infinite alternate;
     }
     @keyframes shift{
       0%{ backdrop-filter: blur(0px); background-position: 0% 50%; }
@@ -28,146 +31,167 @@
       100%{ backdrop-filter: blur(2px); background-position: 100% 50%; }
     }
 
-    /* ====== Stage / Window ====== */
-    .stage{ display:flex; justify-content:center; align-items:center; width:100%; height:100%; position:relative; }
+    /* ====== App Window (Windows-style) ====== */
     .window{
-      max-width:800px; width:90%; background:var(--glass); border:2px solid var(--border);
-      border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.3); overflow:hidden; display:flex; flex-direction:column;
+      position:relative; max-width:840px; width:min(92vw, 840px);
+      background: var(--glass); border:1px solid var(--border); border-radius:6px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      overflow:hidden; display:flex; flex-direction:column;
     }
-    .titlebar{
-      display:flex; align-items:center; padding:8px 12px; background:#f0f0f0; border-bottom:1px solid #999;
-      user-select:none;
-    }
-    .title{ font-weight:700; flex:1; text-align:center; }
-    .chrome button{
-      font-family:inherit; font-size:12px; border:1px solid #888; padding:2px 6px;
-      border-radius:2px; background:#e0e0e0; cursor:pointer; margin-left:4px;
-    }
-    .chrome button:hover{ background:#d0d0d0; }
+    .titlebar{ display:flex; align-items:center; gap:10px; padding:6px 10px; border-bottom:1px solid var(--border); background:var(--bar); }
+    .titlebar .icon{ width:14px; height:14px; border-radius:2px; background:#bbb; box-shadow: inset 0 0 0 1px #888; }
+    .title{ font-weight:700; letter-spacing:.3px; }
+    .titlebar .spacer{ flex:1 }
+    .winbtns{ display:flex; margin-left:auto; border-left:1px solid #d9d9d9 }
+    .winbtn{ width:42px; height:30px; display:grid; place-items:center; background:transparent; border:0; border-left:1px solid #d9d9d9; cursor:pointer; }
+    .winbtn:hover{ background:#e8e8e8 }
+    .winbtn.close:hover{ background:#e81123; color:#fff }
 
-    .wrap{ padding:16px; }
+    .wrap{ padding:16px 18px 20px }
 
-    .pathbar{ display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #888; border-radius:4px; padding:6px 8px; margin-bottom:12px; }
-    .prompt{ font-weight:700; }
-    .path{
-      flex:1; overflow:hidden; white-space:nowrap; border-right:2px solid #333;
-      animation: typing 2.2s steps(28, end) forwards, blink .75s step-end infinite alternate 2.2s;
-    }
+    /* ====== Source Path (auto-typing at top) ====== */
+    .pathbar{ position:relative; display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #a6a6a6; border-radius:4px; padding:8px 10px; box-shadow: inset 0 1px 2px #0001; }
+    .prompt{ color:#333; font-weight:700 }
+    .path{ flex:1; min-width:0; display:inline-block; white-space:nowrap; overflow:hidden; border-right:2px solid #333;
+      animation: typing 2.2s steps(28, end) forwards, blink .75s step-end infinite alternate 2.2s; }
     @keyframes typing{ from{ width:0 } to{ width:100% } }
     @keyframes blink{ 50%{ border-color:transparent } }
 
-    h2{ text-align:center; margin:8px 0; }
-    .pathlabel{ font-weight:700; margin:12px 0 8px; }
+    /* ====== Content list ====== */
+    h2{ margin:14px 0 6px; text-align:center }
+    .pathlabel{ color:#333; font-weight:700; margin:14px 0 8px }
     ul{ list-style:none; padding:0; margin:0 }
-    li{ margin:8px 0 }
-    a{ color:var(--accent); font-weight:700; text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
+    li{ margin:10px 0 }
+    a{ color:#0b5ec9; font-weight:700; text-decoration:none }
+    a:hover{ text-decoration:underline; text-shadow:0 0 6px rgba(11,94,201,.25) }
     .folder::before{ content:"\1F4C1  " }
     .file::before{ content:"\1F4C4  " }
 
-    .status{ display:flex; justify-content:space-between; align-items:center; padding:6px 12px; border-top:1px solid #999; font-size:12px; background:#f5f5f5; }
-    .meter{ height:8px; width:160px; background:#e5e5e5; border:1px solid #888; border-radius:999px; overflow:hidden; }
-    .meter > i{ display:block; height:100%; width:40%; background:linear-gradient(90deg,#22c55e,#0ea5e9); }
+    /* Status bar */
+    .status{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 14px; border-top:1px solid var(--border); background:#f7f7f7; font-size:12px }
+    .meter{ height:8px; width:160px; background:#ececec; border:1px solid #bdbdbd; border-radius:999px; overflow:hidden }
+    .meter > i{ display:block; height:100%; width:40%; background:linear-gradient(90deg,#22c55e,#0ea5e9) }
 
-    /* ====== Scrblz bottom-left ====== */
-    #scrblz{
-      position: fixed; bottom:20px; left:20px; width:160px; cursor: grab;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); z-index:999;
-    }
-    #bubble{
-      position: fixed; bottom:200px; left:50px; max-width:220px;
-      background: rgba(255,255,255,0.95); padding:10px 14px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.3);
-      font-size:13px; display:none;
-    }
-    #bubble::after{
-      content:""; position:absolute; bottom:-10px; left:20px; border-width:10px; border-style:solid;
-      border-color: rgba(255,255,255,0.95) transparent transparent transparent;
-    }
+    /* ====== SCRBLZ Assistant (bottom-left, draggable) ====== */
+    .assistant{ position:fixed; left:20px; bottom:20px; width:200px; z-index:999; }
+    .assistant img{ width:100%; cursor:grab; filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); touch-action:none; }
+    .assistant img:active{ cursor:grabbing }
+    .bubble{ position:absolute; left:10px; bottom:calc(100% + 10px); max-width:260px; background:rgba(255,255,255,.96); color:#111; padding:10px 14px; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,.28); font-size:13px; display:none; }
+    .bubble::after{ content:""; position:absolute; bottom:-10px; left:24px; border-width:10px; border-style:solid; border-color: rgba(255,255,255,.96) transparent transparent transparent; }
+    .bubble.show{ display:block; animation: fadeIn .35s ease }
+    @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px) } to{ opacity:1; transform:translateY(0) } }
+
+    /* ====== Responsive ====== */
+    @media (max-width:860px){ .window{ width:94vw } .assistant{ width:160px } }
   </style>
 </head>
 <body>
-  <div class="stage">
-    <div class="window">
-      <div class="titlebar">
-        <span class="title">Game Loader</span>
-        <div class="chrome">
-          <button id="btnReload">↻</button>
-          <button id="btnOpen">⧉</button>
-        </div>
+  <!-- Main window only (centered). Top character removed. -->
+  <div class="window">
+    <div class="titlebar">
+      <span class="icon" aria-hidden="true"></span>
+      <span class="title">Game Loader</span>
+      <span class="spacer"></span>
+      <div class="winbtns" aria-label="window controls">
+        <button class="winbtn" title="Minimize">—</button>
+        <button class="winbtn" title="Maximize">▢</button>
+        <button class="winbtn close" title="Close">✕</button>
       </div>
-      <div class="wrap">
-        <div class="pathbar">
-          <span class="prompt">C:\\</span>
-          <span id="typedPath" class="path"></span>
-        </div>
-        <h2>Scrblz Hideout</h2>
-        <p class="pathlabel">C:\\SCRBLZ_HIDEOUT\></p>
-        <ul>
-          <li class="folder"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvSd8Vza3DI1ZTvzSMg0VhdUPsQ7HaYOEZahIaO7vDuHajww/viewform" target="_blank" rel="noopener">drive access</a></li>
-          <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank" rel="noopener">drive list</a></li>
-          <li class="file"><a href="about.html">about.txt</a></li>
-        </ul>
+    </div>
+
+    <div class="wrap">
+      <!-- Source path with auto-typing caret animation -->
+      <div class="pathbar" aria-label="source path">
+        <span class="prompt">C:\\</span>
+        <span id="typedPath" class="path" aria-live="polite"></span>
       </div>
-      <div class="status">
-        <span>STATUS: idle</span>
-        <div class="meter"><i></i></div>
-        <span>SCRBLZ:\\\\\\</span>
-      </div>
+
+      <h2>Scrblz Hideout</h2>
+      <p class="pathlabel">C:\\SCRBLZ_HIDEOUT\></p>
+      <ul>
+        <li class="folder"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvSd8Vza3DI1ZTvzSMg0VhdUPsQ7HaYOEZahIaO7vDuHajww/viewform?usp=sharing" target="_blank" rel="noopener">drive access</a></li>
+        <li class="file"><a href="https://drive.google.com/your-share-link" target="_blank" rel="noopener">drive list</a></li>
+        <li class="file"><a href="about.html">about.txt</a></li>
+      </ul>
+    </div>
+
+    <div class="status">
+      <span>STATUS: idle</span>
+      <div class="meter" title="disk usage"><i></i></div>
+      <span>SCRBLZ:\\\\</span>
     </div>
   </div>
 
-  <!-- SCRBLZ Assistant -->
-  <img id="scrblz" src="/mnt/data/588ec04f-af90-4d36-8c61-29bb4bd90d26.png" alt="Scrblz" />
-  <div id="bubble"></div>
+  <!-- SCRBLZ Assistant (moves bubble with him) -->
+  <div id="assistant" class="assistant" aria-live="polite">
+    <div id="bubble" class="bubble" role="status" aria-hidden="true"></div>
+    <img id="scrblz" src="scrblz.png" alt="Scrblz assistant" />
+  </div>
 
   <script>
-    // Auto-type path
-    const TARGET = "SCRBLZ_HIDEOUT\\src\\games\\repo>";
-    const el = document.getElementById('typedPath');
-    let i=0;
-    function typeNext(){
-      if(i <= TARGET.length){
-        el.textContent = TARGET.slice(0,i);
-        i++;
-        setTimeout(typeNext, 15+Math.random()*40);
-      }
+    // Auto-type the path text at the top with a caret animation
+    const TARGET = "SCRBLZ_HIDEOUT\\src\\games\\repo>"; // customize the path text here
+    const pathEl = document.getElementById('typedPath');
+    let ti = 0; (function type(){
+      if(ti <= TARGET.length){ pathEl.textContent = TARGET.slice(0, ti++); setTimeout(type, 15 + Math.random()*40); }
+    })();
+
+    // Simple actions for window control buttons (demo only)
+    document.querySelector('.winbtn.close')?.addEventListener('click', ()=> document.body.style.display='none');
+
+    // SCRBLZ assistant logic
+    const assistant = document.getElementById('assistant');
+    const scrblz = document.getElementById('scrblz');
+    const bubble = document.getElementById('bubble');
+
+    const messages = [
+      'Yo, need help?',
+      'This UI goes hard ngl',
+      'Clippy\'s jealous of me.',
+      'Pro tip: don\'t click random .exe files',
+      'Gamers stay winning.',
+      'SCRBLZ system online ✅'
+    ];
+
+    function showMessage(text){
+      bubble.textContent = text || messages[Math.floor(Math.random()*messages.length)];
+      bubble.classList.add('show');
+      bubble.setAttribute('aria-hidden','false');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(()=>{ bubble.classList.remove('show'); bubble.setAttribute('aria-hidden','true'); }, 5000);
     }
-    setTimeout(typeNext, 350);
+    let hideTimer = null;
 
-    // Chrome buttons
-    document.getElementById('btnReload').addEventListener('click', ()=>location.reload());
-    document.getElementById('btnOpen').addEventListener('click', ()=>window.open('https://drive.google.com/your-share-link','_blank','noopener'));
+    // Click to talk
+    scrblz.addEventListener('click', ()=> showMessage());
+    // Idle chatter every 20–30s
+    setInterval(()=> showMessage(), 20000 + Math.random()*10000);
 
-    // Scrblz messages
-    const scrblz = document.getElementById("scrblz");
-    const bubble = document.getElementById("bubble");
-    const messages = ["Yo, need help?","This UI goes hard ngl","Clippy’s jealous of me.","Pro tip: don’t click random .exe files","Gamers stay winning.","SCRBLZ system online ✅"];
-    function showMessage(){
-      bubble.textContent = messages[Math.floor(Math.random()*messages.length)];
-      bubble.style.display="block";
-      setTimeout(()=>{ bubble.style.display="none"; },5000);
-    }
-    scrblz.addEventListener("click", showMessage);
+    // Draggable (pointer events) — the bubble follows because it\'s inside the same container
+    let dragging = false, offsetX = 0, offsetY = 0;
+    scrblz.addEventListener('pointerdown', (e)=>{
+      dragging = true; scrblz.setPointerCapture(e.pointerId);
+      const r = assistant.getBoundingClientRect();
+      offsetX = e.clientX - r.left; offsetY = e.clientY - r.top;
+      // switch to top/left positioning for smooth dragging
+      assistant.style.top = r.top + 'px';
+      assistant.style.left = r.left + 'px';
+      assistant.style.bottom = 'auto'; assistant.style.right = 'auto';
+    });
 
-    // Draggable Scrblz
-    scrblz.onmousedown = function(e){
-      scrblz.style.cursor = 'grabbing';
-      let shiftX = e.clientX - scrblz.getBoundingClientRect().left;
-      let shiftY = e.clientY - scrblz.getBoundingClientRect().top;
-      function moveAt(pageX,pageY){
-        scrblz.style.left = pageX - shiftX + 'px';
-        scrblz.style.top = pageY - shiftY + 'px';
-      }
-      function onMouseMove(e){ moveAt(e.pageX,e.pageY); }
-      document.addEventListener('mousemove',onMouseMove);
-      scrblz.onmouseup = function(){
-        document.removeEventListener('mousemove',onMouseMove);
-        scrblz.onmouseup = null;
-        scrblz.style.cursor = 'grab';
-      };
-    };
-    scrblz.ondragstart = function(){ return false; };
+    window.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      let nx = e.clientX - offsetX; let ny = e.clientY - offsetY;
+      // clamp to viewport
+      const maxX = window.innerWidth - assistant.offsetWidth;
+      const maxY = window.innerHeight - assistant.offsetHeight;
+      nx = Math.max(0, Math.min(maxX, nx));
+      ny = Math.max(0, Math.min(maxY, ny));
+      assistant.style.left = nx + 'px';
+      assistant.style.top = ny + 'px';
+    });
+
+    window.addEventListener('pointerup', ()=>{ dragging = false; });
   </script>
 </body>
 </html>
