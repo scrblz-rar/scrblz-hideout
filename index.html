@@ -150,14 +150,7 @@
     }
     scrblz.addEventListener("click", showMessage);
 
-    // Draggable Scrblz
-    scrblz.onmousedown = function(e){
-      scrblz.style.cursor = 'grabbing';
-      let shiftX = e.clientX - scrblz.getBoundingClientRect().left;
-      let shiftY = e.clientY - scrblz.getBoundingClientRect().top;
-      function moveAt(pageX,pageY){
-        scrblz.style.left = pageX - shiftX + 'px';
-        scrblz.style.top = pageY - shiftY + 'px';
+   
       }
       function onMouseMove(e){ moveAt(e.pageX,e.pageY); }
       document.addEventListener('mousemove',onMouseMove);
